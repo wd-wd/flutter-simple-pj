@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
@@ -13,20 +12,17 @@ class MyApp extends StatelessWidget {
       ),
       home: Scaffold(
         appBar: AppBar(
-          title: Text(
-            'flutter简单项目',
-//            textAlign: TextAlign.center,
-            style: TextStyle(
-                color: Colors.white
-            ),
+          title: Container(
+            alignment: Alignment.center,
+            child: Text('首页'),
           ),
         ),
         body: Center(
           child: Text('主页',
             style: TextStyle(
-              color: Colors.blue,
-              fontWeight: FontWeight.w700,
-              fontSize: 20.0
+                color: Colors.blue,
+                fontWeight: FontWeight.w700,
+                fontSize: 20.0
             ),
           ),
         ),
@@ -34,4 +30,14 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+
+class CommonTitle extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return build(context);
+
+  }
+}
+
+
 
