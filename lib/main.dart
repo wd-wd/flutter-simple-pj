@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_simple_pj_init/home/home.dart';
+import 'package:flutter_simple_pj_init/hot/hot.dart';
+import 'package:flutter_simple_pj_init/movie/movie.dart';
 
 void main() => runApp(MyApp());
 
@@ -46,13 +49,17 @@ class CommonTitle extends StatelessWidget {
 class MyContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Text(
-        '主页',
-        style: TextStyle(
-            color: Colors.blue, fontSize: 28.0, fontWeight: FontWeight.w700),
+    return TabBarView(children:<Widget>[
+      Center(
+        child: HomePage(),
       ),
-    );
+      Center(
+        child: MoviePage(),
+      ),
+      Center(
+        child: HotPage(),
+      ),
+    ]);
   }
 }
 
