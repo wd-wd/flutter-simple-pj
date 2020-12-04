@@ -18,20 +18,26 @@ class MyApp extends StatelessWidget {
 class CommonTitle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('电影列表'),
-        centerTitle: true,
-        //右侧行为按钮
-        actions: <Widget>[
-          IconButton(icon: Icon(Icons.search), onPressed: () {})
-        ],
+    return DefaultTabController(
+      length: 3,
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text('电影列表'),
+          centerTitle: true,
+          //右侧行为按钮
+          actions: <Widget>[
+            IconButton(icon: Icon(Icons.search), onPressed: () {})
+          ],
+        ),
+        //注意脚手架带的组件，不在appbar中可以看源码tips:在appBar中加了actions
+        // 后endDrawer不显示,加上leading后drawer不显示
+        drawer: MyDrawer(),
+        //左边栏
+        endDrawer: MyDrawer(),
+        //右边栏
+        bottomNavigationBar: MyTabBar(),
+        body: MyContent(),
       ),
-      //注意脚手架带的组件，不在appbar中可以看源码tips:在appBar中加了actions
-      // 后endDrawer不显示,加上leading后drawer不显示
-      drawer: MyDrawer(), //左边栏
-      endDrawer: MyDrawer(), //右边栏
-      body: MyContent(),
     );
   }
 }
@@ -50,6 +56,7 @@ class MyContent extends StatelessWidget {
   }
 }
 
+//左侧边栏
 class MyDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -87,5 +94,34 @@ class MyDrawer extends StatelessWidget {
         ],
       ),
     );
+  }
+}
+
+//底部导航
+class MyTabBar extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+        height: 50,
+        decoration: BoxDecoration(color: Colors.red),
+        child: TabBar(
+          labelStyle: TextStyle(
+            height: 0,fontSize: 12
+          ),
+          tabs: <Widget>[
+            Tab(
+              icon: Icon(Icons.home),
+              text: '首页',
+            ),
+            Tab(
+              icon: Icon(Icons.movie),
+              text: '电影',
+            ),
+            Tab(
+              icon: Icon(Icons.movie_filter),
+              text: 'hot',
+            )
+          ],
+        ));
   }
 }
