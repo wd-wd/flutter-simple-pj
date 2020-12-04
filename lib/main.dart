@@ -49,16 +49,10 @@ class CommonTitle extends StatelessWidget {
 class MyContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return TabBarView(children:<Widget>[
-      Center(
-        child: HomePage(),
-      ),
-      Center(
-        child: MoviePage(),
-      ),
-      Center(
-        child: HotPage(),
-      ),
+    return TabBarView(children: <Widget>[
+      HomePage(),
+      MoviePage(),
+      HotPage(),
     ]);
   }
 }
@@ -112,9 +106,7 @@ class MyTabBar extends StatelessWidget {
         height: 50,
         decoration: BoxDecoration(color: Colors.red),
         child: TabBar(
-          labelStyle: TextStyle(
-            height: 0,fontSize: 12
-          ),
+          labelStyle: TextStyle(height: 0, fontSize: 12),
           tabs: <Widget>[
             Tab(
               icon: Icon(Icons.home),
