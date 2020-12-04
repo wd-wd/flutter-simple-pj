@@ -11,17 +11,26 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.red,
       ),
-      home:Scaffold(
+      home: Scaffold(
         appBar: AppBar(
           title: Text(
             'flutter简单项目',
 //            textAlign: TextAlign.center,
             style: TextStyle(
-              color: Colors.white
+                color: Colors.white
             ),
           ),
         ),
-      ) ,
+        body: Center(
+          child: Text('主页',
+            style: TextStyle(
+              color: Colors.blue,
+              fontWeight: FontWeight.w700,
+              fontSize: 20.0
+            ),
+          ),
+        ),
+      ),
     );
   }
 }
