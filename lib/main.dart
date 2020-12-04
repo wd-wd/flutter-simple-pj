@@ -50,9 +50,9 @@ class MyContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TabBarView(children: <Widget>[
-      HomePage(),
-      MoviePage(),
-      HotPage(),
+      HomePage(type: 'in_theater',),
+      MoviePage(type: 'coming_soon',),
+      HotPage(type: 'tp250',),
     ]);
   }
 }
