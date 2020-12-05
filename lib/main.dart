@@ -25,7 +25,7 @@ class CommonTitle extends StatelessWidget {
       length: 3,
       child: Scaffold(
         appBar: AppBar(
-          title: Text('电影列表'),
+          title: Text('商品列表'),
           centerTitle: true,
           //右侧行为按钮
           actions: <Widget>[
