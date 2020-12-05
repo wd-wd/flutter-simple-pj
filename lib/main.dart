@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_simple_pj_init/bottom_bar/bottom_bar_one.dart';
 import 'package:flutter_simple_pj_init/home/home.dart';
 import 'package:flutter_simple_pj_init/hot/hot.dart';
 import 'package:flutter_simple_pj_init/movie/movie.dart';
@@ -14,7 +15,7 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.red,
         ),
-        home: CommonTitle());
+        home: BottomNavigationBarWidget());
   }
 }
 
@@ -50,9 +51,9 @@ class MyContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TabBarView(children: <Widget>[
-      HomePage(type: 'in_theater',),
-      MoviePage(type: 'coming_soon',),
-      HotPage(type: 'tp250',),
+      HomePage(type: 'home',),
+      MoviePage(type: 'movie',),
+      HotPage(type: 'hot',),
     ]);
   }
 }
