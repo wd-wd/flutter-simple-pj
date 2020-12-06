@@ -28,58 +28,92 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(color: Color(int.parse('0xfff5f5f5'))),
-      child: ListView.builder(
-          //这个意思是创建列表的条目
-          itemCount: productList.length, //这个是代表创建的次数，循环次数
-          itemBuilder: (BuildContext context, int index) {
-            //这是每个条目的内容
-            //定义item的数据变量
-            var productItemData = productList[index];
-            return Container(
-              margin: EdgeInsets.only(top: 10, left: 15, right: 15),
-              decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.all(Radius.circular(6.0))),
-              child: Row(
-                children: <Widget>[
-                  //图片显示，这样写是实现图片圆角的一种方式，通过装饰器
-                  Container(
-                    margin: EdgeInsets.only(top: 15, left: 15, bottom: 15),
-                    width: 108,
-                    height: 108,
-                    decoration: BoxDecoration(
-                        image: DecorationImage(
-                          image: NetworkImage(
-                            productItemData['imgUrl'],
-                          ),
-                          fit: BoxFit.cover,
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('首页'),
+        centerTitle: true,
+      ),
+      body: Container(
+        decoration: BoxDecoration(color: Color(int.parse('0xfff5f5f5'))),
+        child: ListView.builder(
+            //这个意思是创建列表的条目
+            itemCount: productList.length, //这个是代表创建的次数，循环次数
+            itemBuilder: (BuildContext context, int index) {
+              //这是每个条目的内容
+              //定义item的数据变量
+              var productItemData = productList[index];
+              return Container(
+                  height: 140,
+                  margin: EdgeInsets.only(top: 10, left: 15, right: 15),
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.all(Radius.circular(6.0))),
+                  child: Stack(
+                    children: <Widget>[
+                      Align(
+                        alignment: Alignment.topLeft,
+                        child: Row(
+                          children: <Widget>[
+                            //图片显示，这样写是实现图片圆角的一种方式，通过装饰器
+                            Container(
+                              margin: EdgeInsets.only(
+                                  top: 15, left: 15, bottom: 15),
+                              width: 108,
+                              height: 108,
+                              decoration: BoxDecoration(
+                                  image: DecorationImage(
+                                    image: NetworkImage(
+                                      productItemData['imgUrl'],
+                                    ),
+                                    fit: BoxFit.cover,
+                                  ),
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(6.0))),
+                            ),
+                            Container(
+                              height: 108,
+                              margin: EdgeInsets.only(left: 10),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: <Widget>[
+                                  Container(
+                                    child: Text(
+                                      productItemData['spuName'],
+                                    ),
+                                    width: 230,
+                                  ),
+                                  Text(
+                                    '会员价:${productItemData['spuStyle']['price']['price'] / 100}',
+                                    style: TextStyle(color: Colors.red),
+                                  ),
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: <Widget>[
+                                      Text(
+                                          '市场价:${productItemData['spuStyle']['secondPrice']['price'] / 100}',
+                                          style: TextStyle(color: Colors.grey)),
+                                    ],
+                                  )
+                                ],
+                              ),
+                            ),
+                          ],
                         ),
-                        borderRadius: BorderRadius.all(Radius.circular(6.0))),
-                  ),
-                  Container(
-                    height:108 ,
-                    margin: EdgeInsets.only(left: 10),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Container(child: Text(productItemData['spuName'],),
-                          width: 230,
+                      ),
+                      Align(
+                        alignment: Alignment.bottomRight,
+                        child: Container(
+                          padding: EdgeInsets.only(right: 15,bottom: 10),
+                          child: Image.asset('images/add_cart.png'),
                         ),
-                        Text(
-                          '会员价:${productItemData['spuStyle']['price']['price']/100}',
-                          style: TextStyle(color: Colors.red),
-                        ),
-                        Text('市场价:${productItemData['spuStyle']['secondPrice']['price']/100}',
-                            style: TextStyle(color: Colors.grey)),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            );
-          }),
+                      )
+                    ],
+                  ));
+            }),
+      ),
     );
   }
 
