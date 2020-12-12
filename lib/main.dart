@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_simple_pj_init/bottom_bar/bottom_bar_one.dart';
+import 'package:flutter_simple_pj_init/bottom_bar/bottom_bar_three.dart';
 import 'package:flutter_simple_pj_init/bottom_bar/bottom_bar_two.dart';
 import 'package:flutter_simple_pj_init/home/home.dart';
 import 'package:flutter_simple_pj_init/hot/hot.dart';
@@ -16,7 +17,7 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.red,
         ),
-        home: BottomNavigationBarWidget());
+        home: BottomBarClickWidget());
   }
 }
 

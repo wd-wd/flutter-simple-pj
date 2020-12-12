@@ -17,7 +17,7 @@ class HomePage extends StatefulWidget {
 }
 
 //一半写法是下划线加要管理的类名加state
-class _HomePageState extends State<HomePage> {
+class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin {
   var productList = [];
 
   @override
@@ -125,4 +125,8 @@ class _HomePageState extends State<HomePage> {
       productList = homeResponse.data['data'];
     });
   }
+
+  @override
+  bool get wantKeepAlive => true;
+
 }
