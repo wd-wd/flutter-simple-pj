@@ -10,7 +10,7 @@ class BottomBarClickWidget extends StatefulWidget {
 
 class _BottomBarClickWidgetState extends State<BottomBarClickWidget> {
   //bod内容数组
-  List<Widget> _widgetList=List();
+  List<Widget> _widgetList = List();
 
   //当前选中的哪一个body
   int _currentIndex = 0;
@@ -18,15 +18,29 @@ class _BottomBarClickWidgetState extends State<BottomBarClickWidget> {
   @override
   void initState() {
     super.initState();
-    _widgetList..add(HomePage(type: "home",))
-      ..add(MoviePage(type: "movie",))
-      ..add(HotPage(type: "hot",));
-  }
+    _widgetList
+      ..add(HomePage(
+        type: "home",
+      ))
+      ..add(MoviePage(
+        type: "movie",
+      ))
+      ..add(HotPage(
+        type: "hot",
+      ));
 
+  }
+ var _pageController = PageController(initialPage: 0);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: _widgetList[_currentIndex],
+      //这样写会导致在每次切换的时候 都rebuild 子控件
+//      body: _widgetList[_currentIndex],
+      body: PageView.builder(
+          controller: _pageController,
+          onPageChanged: _pageChanged,
+          itemCount: _widgetList.length,
+          itemBuilder: (context, index) => _widgetList[index]),
       bottomNavigationBar: BottomAppBar(
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -93,7 +107,7 @@ class _BottomBarClickWidgetState extends State<BottomBarClickWidget> {
   }
 
   //给点击添加方法,参数index
-  void _onTap(int index) {
+  void _pageChanged(int index) {
     //防止重复点击
     if (_currentIndex != index) {
       //因为是有状态的所以要加
@@ -102,9 +116,21 @@ class _BottomBarClickWidgetState extends State<BottomBarClickWidget> {
       });
     }
   }
-  //颜色切换的方法返回值Color
-Color getCurrentColor(int index){
-    return _currentIndex==index?Theme.of(context).primaryColor:Colors.black;
-}
+  void _onTap(int index) {
+        _pageController.jumpToPage(index);
+//    _pageController.animateToPage(index,
+//        duration: const Duration(milliseconds: 100), curve: Curves.easeOutSine);
+  }
 
+  //颜色切换的方法返回值Color
+  Color getCurrentColor(int index) {
+    return _currentIndex == index
+        ? Theme.of(context).primaryColor
+        : Colors.black;
+  }
+  @override
+  void dispose() {
+    super.dispose();
+    _pageController.dispose();
+  }
 }
