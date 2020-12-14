@@ -120,7 +120,7 @@ class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin 
   }
 
   getMovieList() async {
-    ApiRepository().getHome().then((value){
+    getHome().then((value){
       print(value);
       setState(() {
         productList = value['data'];
