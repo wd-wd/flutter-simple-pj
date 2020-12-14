@@ -1,5 +1,9 @@
+import 'dart:convert';
+import 'dart:io';
+
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_simple_pj_init/home/home_dto.dart';
 import 'package:flutter_simple_pj_init/http/http_manage.dart';
 import 'package:flutter_simple_pj_init/repository/api_repository.dart';
 
@@ -20,7 +24,7 @@ class HomePage extends StatefulWidget {
 
 //一半写法是下划线加要管理的类名加state
 class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin {
-  var productList = [];
+  List<HomeDataDTO> productList = List();
 
   @override
   void initState() {
@@ -65,7 +69,7 @@ class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin 
                               decoration: BoxDecoration(
                                   image: DecorationImage(
                                     image: NetworkImage(
-                                      productItemData['imgUrl'],
+                                      productItemData.imgUrl,
                                     ),
                                     fit: BoxFit.cover,
                                   ),
@@ -82,12 +86,12 @@ class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin 
                                 children: <Widget>[
                                   Container(
                                     child: Text(
-                                      productItemData['spuName'],
+                                      productItemData.spuName,
                                     ),
                                     width: 230,
                                   ),
                                   Text(
-                                    '会员价:${productItemData['spuStyle']['price']['price'] / 100}',
+                                    '会员价:${productItemData.spuStyle.price.price / 100}',
                                     style: TextStyle(color: Colors.red),
                                   ),
                                   Row(
@@ -95,7 +99,7 @@ class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin 
                                         MainAxisAlignment.spaceBetween,
                                     children: <Widget>[
                                       Text(
-                                          '市场价:${productItemData['spuStyle']['secondPrice']['price'] / 100}',
+                                          '市场价:${productItemData.spuStyle.secondPrice.price / 100}',
                                           style: TextStyle(color: Colors.grey)),
                                     ],
                                   )
@@ -121,9 +125,9 @@ class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin 
 
   getMovieList() async {
     getHome().then((value){
-      print(value);
+      // print(json.decode(value));
       setState(() {
-        productList = value['data'];
+        productList =HomeDTO.fromJson(value).data;
       });
     });
 
