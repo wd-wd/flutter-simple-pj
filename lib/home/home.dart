@@ -1,5 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_simple_pj_init/http/http_manage.dart';
+import 'package:flutter_simple_pj_init/repository/api_repository.dart';
 
 var dio = new Dio();
 
@@ -118,12 +120,14 @@ class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin 
   }
 
   getMovieList() async {
-    var homeResponse = await dio.get(
-        'http://test.api.happygo.com/product/query/spuPage?query.sourceType=7&query.id=422&page=0&size=10&query.isSort=false');
-    print(homeResponse);
-    setState(() {
-      productList = homeResponse.data['data'];
+    ApiRepository().getHome().then((value){
+      print(value);
+      setState(() {
+        productList = value['data'];
+      });
     });
+
+
   }
 
   @override
